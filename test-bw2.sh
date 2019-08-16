@@ -17,8 +17,11 @@ function run_bench() {
 	echo output is $out
 
 	cd $PBDIR
-
+	echo restart pciebench
         sudo sh ./restart.sh
+
+	sleep 0.5
+
         cmd="sudo ./bin/benchmark \
                 -d $dir -t $typ -p FIX 0 -n $len -l 30 \
                 -P $mem" > $out
@@ -26,9 +29,9 @@ function run_bench() {
         $cmd > $out
 }
 
-for x in `seq 512`; do
+for x in `seq 128`; do
 
-	len=$(( $x * 4 ))
+	len=$(( $x * 16 ))
 
 	out="$CRDIR/output/pciebench_bw2_read_ptr-fix_len-${len}.txt"
 	run_bench $out bw W $len $NETTLP
