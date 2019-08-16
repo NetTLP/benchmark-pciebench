@@ -20,13 +20,13 @@ function run_bench() {
 
         sudo sh ./restart.sh
         cmd="sudo ./bin/benchmark \
-                -d $dir -t $typ -p FIX 0 -n $len -l 50 \
+                -d $dir -t $typ -p RAN 2097152 -n $len -l 50 \
                 -P $mem" > $out
         echo $cmd
         $cmd > $out
 }
 
 for len in 8 16 32 64 128 256 512 1024 2048 4096; do
-	out="$CRDIR/output/pciebench_bw_read_ptr-fix_len-${len}.txt"
+	out="$CRDIR/output/pciebench_bw_read_ptr-random_len-${len}.txt"
 	run_bench $out bw W $len $NETTLP
 done
