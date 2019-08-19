@@ -24,12 +24,13 @@ function run_bench() {
                 -P $mem"
         echo $cmd
 
-        $cmd > $out
+        $cmd >> $out
 }
 
-
+for y in `seq 98`; do
 for x in `seq 128`; do
 	len=$(( $x * 16 ))
 	out="$CRDIR/output/pciebench_lat2_read_ptr-random_len-${len}.txt"
 	run_bench $out lat W $len $NETTLP
+done
 done
