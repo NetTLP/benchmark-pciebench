@@ -19,18 +19,21 @@ function run_bench() {
 	cd $PBDIR
 
         sudo sh ./restart.sh
+#        cmd="sudo ./bin/benchmark \
+#                -d $dir -t $typ -p RAN 2097152 -n $len -l 1000 \
+#                -P $mem"
         cmd="sudo ./bin/benchmark \
-                -d $dir -t $typ -p RAN 2097152 -n $len -l 1000 \
+                -d $dir -t $typ -p FIX 0 -n $len -l 1000 \
                 -P $mem"
         echo $cmd
 
         $cmd >> $out
 }
 
-for y in `seq 98`; do
+for y in `seq 99`; do
 for x in `seq 128`; do
 	len=$(( $x * 16 ))
-	out="$CRDIR/output/pciebench_lat2_read_ptr-random_len-${len}.txt"
+	out="$CRDIR/output/pciebench_lat2_read_ptr-fix_len-${len}.txt"
 	run_bench $out lat W $len $NETTLP
 done
 done
