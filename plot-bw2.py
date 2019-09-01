@@ -57,6 +57,7 @@ def main():
 
     ax.plot(xticks, yaxis, color = get_color())
     
+    plt.yticks([0, 1, 2, 3, 4, 5])
     plt.xticks([16, 256, 512, 768, 1024, 1280, 1536, 1792, 2048])
 
     ax.tick_params(labelsize = fontsize)
@@ -65,7 +66,7 @@ def main():
     
     ax.grid(True, linestyle = "--", linewidth = 0.5)
 
-    change_aspect_ratio(ax, 2)
+    change_aspect_ratio(ax, 2.5)
 
     print("save '{}'".format(pdffile))
     plt.savefig(pdffile, bbox_inches = "tight", pad_inches = 0.005)

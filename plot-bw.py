@@ -55,6 +55,9 @@ def main():
 
     ax.plot(xticks, yaxis, marker = get_marker(), color = get_color())
     
+    print(xticks)
+    print(yaxis)
+
     plt.xticks(xticks, dma_lens)
 
     ax.tick_params(labelsize = fontsize)

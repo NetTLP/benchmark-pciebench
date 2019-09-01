@@ -23,13 +23,16 @@ matplotlib.rcParams['ps.fonttype'] = 42
 
 def parse(filename):
     
-    gbpses = []
+    rtts = []
 
     with open(filename, "r") as f:
         for line in f:
-            gbpses.append(float(line.strip().split(",")[3]) / 1000)
+            rtts.append(float(line.strip().split(",")[3]) / 1000)
 
-    return min(gbpses)
+    print("%s: %d lines" % (filename, len(rtts)))
+
+    #return statistics.median(rtts)
+    return min(rtts)
 
 
 def main():
