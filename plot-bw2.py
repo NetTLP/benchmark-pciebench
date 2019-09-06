@@ -7,8 +7,9 @@ import matplotlib
 from myplotlib import get_marker, get_color, change_aspect_ratio
 
 ratio = 1.5
-fontsize = 14
-lfontsize = 13.5
+
+fontsize = 22
+lfontsize = 18
 markersize = 11
 linewidth = 2.4
 lines = { "linewidth" : linewidth,
@@ -37,6 +38,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--pattern", help = "access pattern",
                         choices = ["fix", "random"], default = "fix")
+    parser.add_argument("-r", "--ratio", help = "graph ratio",
+                        type = float, default = ratio)
     args = parser.parse_args()
 
     pdffile = "graph/graph_bw2_{}.pdf".format(args.pattern)
@@ -58,15 +61,15 @@ def main():
     ax.plot(xticks, yaxis, color = get_color())
     
     plt.yticks([0, 1, 2, 3, 4, 5])
-    plt.xticks([16, 256, 512, 768, 1024, 1280, 1536, 1792, 2048])
+    plt.xticks([16, 512, 1024, 1536, 2048])
 
     ax.tick_params(labelsize = fontsize)
     ax.set_ylabel("throughput (Gbps)", fontsize = fontsize)
-    ax.set_xlabel("transfer size (byte)", fontsize = fontsize)
+    ax.set_xlabel("request size (byte)", fontsize = fontsize)
     
     ax.grid(True, linestyle = "--", linewidth = 0.5)
 
-    change_aspect_ratio(ax, 2.5)
+    change_aspect_ratio(ax, args.ratio)
 
     print("save '{}'".format(pdffile))
     plt.savefig(pdffile, bbox_inches = "tight", pad_inches = 0.005)
